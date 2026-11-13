@@ -55,7 +55,7 @@ Repo del equipo implementador: https://github.com/Jona-77/SIGVA (por si queremos
 - **Rol de gestión:** asumimos el rol de PO (definimos BV nosotros), verificamos criterios contra el código y la ejecución, no solo contra la checklist.
 - Lecciones finales del informe S3: tandas pequeñas con checklist; probar criterios en la pantalla real y en distintas configuraciones; planificar el despliegue con responsable; registrar horas reales; DoD con puntos innegociables.
 
-> ⚠️ A revisar: la retro del S3 dice que la integración del S2 se completó “a medias”, pero la tabla de review la marca ✅ Aprobada. Definir cuál es la versión correcta antes de escribir el informe.
+> ✅ Resuelto: la review del S3 solo da por cumplido el criterio 1 (integración a `master` vía PR #3 y #4); el criterio 2 (despliegue en el entorno de demostración) no se verificó. Por eso la retro dice “a medias”: **integración completa, despliegue pendiente**.
 
 ## 3. Informe final — estructura (≤ 2 carillas)
 
@@ -93,7 +93,7 @@ Formato de las slides: a definir (Google Slides / PowerPoint / PDF exportado). R
 
 ## 5. Pasos
 
-1. [ ] Resolver la inconsistencia de la integración del S2 (ver ⚠️).
+1. [x] Resolver la inconsistencia de la integración del S2 (ver sección 2).
 2. [ ] Decidir si se agregan capturas del sistema (clonar el repo del equipo blanco y levantarlo, o pedirles capturas).
 3. [ ] Redactar `informe-final-equipo-verde.md` siguiendo la sección 3.
 4. [ ] Revisión del grupo + control de largo (≤ 2 carillas en PDF).

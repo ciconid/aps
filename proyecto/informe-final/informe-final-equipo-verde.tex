@@ -1,0 +1,90 @@
+\documentclass[11pt,a4paper]{article}
+\input{../plantilla/preambulo}
+\geometry{margin=2cm}
+
+\title{\vspace{-1.8cm}\textbf{Informe Final --- SIGVA}\\[3pt]
+\large Sistema Integral de Gestión de Vuelos y Venta de Pasajes}
+\author{\normalsize Administración de Proyectos de Software --- Segundo Cuatrimestre 2026\\[2pt]
+\normalsize Equipo Verde (Análisis y Management): Bertotto Tomás, Blanco Oscar, Cid Nicolás\\[2pt]
+\small Implementación a cargo del equipo blanco}
+\date{}
+
+\begin{document}
+\maketitle
+\vspace{-0.5cm}
+
+\section{Descripción del proyecto y objetivos}
+
+SIGVA es una plataforma para una aerolínea nacional que hoy gestiona la creación de vuelos, la venta de pasajes y la atención de pasajeros de forma manual y fragmentada. La meta es centralizar esa operación en una plataforma web con interfaces para administradores, empleados de mostrador y pasajeros, más una aplicación móvil para pasajeros. Objetivos principales:
+\begin{itemize}
+  \item ABM de vuelos: días de operación, horarios, ruta, período de venta, capacidad y precio por clase.
+  \item Compra de hasta 9 pasajes en menos de 5 minutos, desde la web o la app.
+  \item Envío automático del pasaje y la factura por email, y alertas ante cambios o cancelaciones.
+  \item Reportes de ocupación por vuelo, clase y fecha.
+\end{itemize}
+
+Como comisión de gestión asumimos el rol de Product Owner:
+\begin{itemize}
+  \item Armamos el product backlog: \textbf{29 user stories, 144 SP y 233 puntos de valor de negocio (BV)} en 8 épicas.
+  \item Priorizamos por dependencias, luego por BV/SP, con una velocity inicial de 35--40 SP por sprint.
+  \item Planificamos cada sprint y revisamos cada incremento contra los criterios de aceptación.
+  \item El riesgo principal (sobreventa por compras simultáneas) se convirtió en una story propia: reserva temporal con control de concurrencia (US-15).
+\end{itemize}
+
+\section{Resumen por sprint}
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{@{}c >{\raggedright\arraybackslash}X c c c >{\raggedright\arraybackslash}X@{}}
+\toprule
+\textbf{Sprint} & \textbf{Objetivo} & \textbf{US} & \textbf{SP} & \textbf{BV} & \textbf{Resultado} \\
+\midrule
+1 & El administrador gestiona la oferta de vuelos (login, aeropuertos, ABM y listado) & 8 & 39 & 68 & Demo completa; sin tests, CI ni diagrama ER; US-08 parcial \\
+2 & El pasajero se registra, busca, selecciona, carga datos, reserva y paga & 6+2 & 35 & 63 & 64 tests; todo aprobado salvo US-11 (``+1'') \\
+3 & Emails, reintento de pago, historial, alertas, cuentas de empleados y reportes & 6+2 & 32 & 47 & 71 tests; 6/6 US aprobadas sin correcciones \\
+\bottomrule
+\end{tabularx}
+\end{center}
+{\footnotesize\color{gris} ``+2'': user stories técnicas para saldar deuda del sprint anterior.}
+
+\begin{itemize}
+  \item \textbf{Sprint 0 (planificación).} Supuestos del análisis, backlog completo, plan en 4 sprints, Definition of Done y backlog detallado del Sprint 1.
+  \item \textbf{Sprint 1.} Se llegó a la demo sacrificando tests, CI y diagrama ER, que pasaron como deuda al Sprint 2. La comunicación con un solo vocero por equipo resultó insuficiente y pasamos a un grupo común.
+  \item \textbf{Sprint 2.} Flujo de compra punta a punta, con pago en modo sandbox local (aceptado ante la falta de cuenta en Mercado Pago). La entrega en tandas con checklist facilitó la review, pero la checklist dio por cumplida US-11 sin estarlo.
+  \item \textbf{Sprint 3.} Se corrigió US-11 y se integró el Sprint 2 a \texttt{master}; el despliegue en el entorno de demostración quedó pendiente. Hubo observaciones menores (zona horaria en ``+1'', estados en inglés, PDFs sin diseño) y la entrega llegó en un único commit de 1.537 líneas sin documentación actualizada.
+\end{itemize}
+
+\begin{destacado}{Resultado global}
+Se entregaron \textbf{20 user stories de producto: 106 de 144 SP ($74\%$) y 178 de 233 BV ($76\%$)}.
+\begin{center}
+\begin{tikzpicture}[x=0.075cm, y=0.4cm]
+  \fill[azul] (0,0) rectangle (39,1);  \node[white,font=\scriptsize\bfseries] at (19.5,0.5) {S1: 39};
+  \fill[azul!75] (39,0) rectangle (74,1); \node[white,font=\scriptsize\bfseries] at (56.5,0.5) {S2: 35};
+  \fill[azul!55] (74,0) rectangle (106,1); \node[white,font=\scriptsize\bfseries] at (90,0.5) {S3: 32};
+  \fill[gris!25] (106,0) rectangle (144,1); \node[gris!80!black,font=\scriptsize\bfseries] at (125,0.5) {no realizado: 38};
+  \draw[gris] (0,0) rectangle (144,1);
+  \node[font=\scriptsize, anchor=east] at (-1,0.5) {SP};
+\end{tikzpicture}
+\end{center}
+Quedó afuera el Sprint 4 planificado (US-12, 21, 23--29): filtros de búsqueda, exportación de reportes, interfaz de mostrador y app móvil. La materia tuvo 3 sprints de desarrollo, y la priorización por BV/SP dejó al final lo de menor valor relativo.
+\end{destacado}
+
+\section{Conclusiones}
+
+\subsection{Sobre la modalidad ágil}
+\begin{itemize}
+  \item Las iteraciones cortas permitieron recalibrar: tras sobreestimar implementación y subestimar testing en el Sprint 1, bajamos el compromiso de 39 a 35 y luego a 32 SP, y el Sprint 3 se cumplió completo.
+  \item Los criterios de aceptación objetivos, verificados en el código y en la ejecución, detectaron defectos que la checklist del equipo implementador no mostraba (US-11).
+  \item Pasar la deuda como user stories técnicas al sprint siguiente funcionó, pero le restó capacidad a cada sprint y el patrón se repitió (S1$\to$S2$\to$S3).
+  \item El testing creció de 0 a 64 y a 71 pruebas, aunque siguen faltando tests de frontend y de zona horaria.
+\end{itemize}
+
+\subsection{Qué haríamos distinto}
+\begin{itemize}
+  \item Registrar horas reales desde el Sprint 1: sin ellas no pudimos validar la estimación en horas.
+  \item Acordar al inicio qué puntos de la DoD no se negocian (tests, CI, documentación).
+  \item Planificar el despliegue con un responsable, no dejarlo como último paso.
+  \item Pedir entregas en tandas pequeñas con checklist, y probar cada criterio en la pantalla real y en distintas configuraciones.
+\end{itemize}
+
+\end{document}
