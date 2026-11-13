@@ -49,9 +49,9 @@ Como comisión de gestión asumimos el rol de Product Owner:
 
 \begin{itemize}
   \item \textbf{Sprint 0 (planificación).} Supuestos del análisis, backlog completo, plan en 4 sprints, Definition of Done y backlog detallado del Sprint 1.
-  \item \textbf{Sprint 1.} Se llegó a la demo sacrificando tests, CI y diagrama ER, que pasaron como deuda al Sprint 2. La comunicación con un solo vocero por equipo resultó insuficiente y pasamos a un grupo común.
-  \item \textbf{Sprint 2.} Flujo de compra punta a punta, con pago en modo sandbox local (aceptado ante la falta de cuenta en Mercado Pago). La entrega en tandas con checklist facilitó la review, pero la checklist dio por cumplida US-11 sin estarlo.
-  \item \textbf{Sprint 3.} Se corrigió US-11 y se integró el Sprint 2 a \texttt{master}; el despliegue en el entorno de demostración quedó pendiente. Hubo observaciones menores (zona horaria en ``+1'', estados en inglés, PDFs sin diseño) y la entrega llegó en un único commit de 1.537 líneas sin documentación actualizada.
+  \item \textbf{Sprint 1.} Para llegar a la demo se descartaron la CI y el diagrama ER, y el testing pasó al Sprint 2 como user story técnica. La comunicación con un solo vocero por equipo resultó insuficiente y pasamos a un grupo común.
+  \item \textbf{Sprint 2.} Flujo de compra punta a punta, con pago en modo sandbox local (se decidió no usar una cuenta de Mercado Pago). La entrega en tandas con checklist facilitó la review, pero la checklist dio por cumplida US-11 sin estarlo.
+  \item \textbf{Sprint 3.} Se corrigió US-11 y se integró el Sprint 2 a \texttt{master}, aunque la story técnica de integración y despliegue se completó a medias. Hubo observaciones menores (zona horaria en ``+1'', estados en inglés, PDFs sin diseño) y la entrega llegó en un único commit de 1.537 líneas sin documentación actualizada.
 \end{itemize}
 
 \begin{destacado}{Resultado global}
@@ -66,23 +66,23 @@ Se entregaron \textbf{20 user stories de producto: 106 de 144 SP ($74\%$) y 178 
   \node[font=\scriptsize, anchor=east] at (-1,0.5) {SP};
 \end{tikzpicture}
 \end{center}
-Quedó afuera el Sprint 4 planificado (US-12, 21, 23--29): filtros de búsqueda, exportación de reportes, interfaz de mostrador y app móvil. La materia tuvo 3 sprints de desarrollo, y la priorización por BV/SP dejó al final lo de menor valor relativo.
+Quedaron afuera US-12 (filtrado y ordenamiento, planificada para el Sprint 3) y el Sprint 4 planificado (US-21, 23--29): exportación de reportes, interfaz de mostrador y app móvil. El proyecto terminó en el Sprint 3, y las stories de mostrador y app dependían de casi todo lo anterior.
 \end{destacado}
 
 \section{Conclusiones}
 
 \subsection{Sobre la modalidad ágil}
 \begin{itemize}
-  \item Las iteraciones cortas permitieron recalibrar: tras sobreestimar implementación y subestimar testing en el Sprint 1, bajamos el compromiso de 39 a 35 y luego a 32 SP, y el Sprint 3 se cumplió completo.
+  \item Las iteraciones cortas permitieron recalibrar: tras sobreestimar implementación y subestimar testing en el Sprint 1, bajamos las horas de implementación del Sprint 2; tras un Sprint 2 con el tiempo justo, bajamos de 35 a 32 SP, y el Sprint 3 se cumplió completo.
   \item Los criterios de aceptación objetivos, verificados en el código y en la ejecución, detectaron defectos que la checklist del equipo implementador no mostraba (US-11).
-  \item Pasar la deuda como user stories técnicas al sprint siguiente funcionó, pero le restó capacidad a cada sprint y el patrón se repitió (S1$\to$S2$\to$S3).
+  \item Pasar el trabajo pendiente como user stories técnicas al sprint siguiente permitió completarlo en el Sprint 2; en el Sprint 3, en cambio, la integración quedó a medias.
   \item El testing creció de 0 a 64 y a 71 pruebas, aunque siguen faltando tests de frontend y de zona horaria.
 \end{itemize}
 
 \subsection{Qué haríamos distinto}
 \begin{itemize}
   \item Registrar horas reales desde el Sprint 1: sin ellas no pudimos validar la estimación en horas.
-  \item Acordar al inicio qué puntos de la DoD no se negocian (tests, CI, documentación).
+  \item Acordar al inicio qué puntos de la DoD no se sacrifican cuando el tiempo se acorta.
   \item Planificar el despliegue con un responsable, no dejarlo como último paso.
   \item Pedir entregas en tandas pequeñas con checklist, y probar cada criterio en la pantalla real y en distintas configuraciones.
 \end{itemize}
